@@ -1,9 +1,12 @@
 package com.ciel.webview;
 
+import android.Manifest;
 import android.content.Context;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.webkit.JavascriptInterface;
+import android.webkit.PermissionRequest;
+import android.webkit.WebChromeClient;
 import org.apache.cordova.*;
 import java.util.Locale;
 
@@ -16,9 +19,16 @@ public class MainActivity extends CordovaActivity implements TextToSpeech.OnInit
         loadUrl(launchUrl);
         tts = new TextToSpeech(this, this);
         appView.getSettings().setJavaScriptEnabled(true);
+        appView.getSettings().setMediaPlaybackRequiresUserGesture(false);
         appView.addJavascriptInterface(new BottoNativeTTS(this), "BottoNativeTTS");
-        
-        // Downloader Listener
+
+        appView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onPermissionRequest(final PermissionRequest request) {
+                request.grant(request.getResources());
+            }
+        });
+
         appView.setDownloadListener((url, userAgent, contentDisposition, mimetype, contentLength) -> {
             android.app.DownloadManager.Request request = new android.app.DownloadManager.Request(android.net.Uri.parse(url));
             request.allowScanningByMediaScanner();
