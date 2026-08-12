@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.ciel.webview" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Ciel</name>
+    <description>Ciel WebView Application</description>
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <platform name="android">
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.RECORD_AUDIO" />
+            <uses-permission android:name="android.permission.CAMERA" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+        </config-file>
+    </platform>
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+</widget>
