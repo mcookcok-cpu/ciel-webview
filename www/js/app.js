@@ -9,7 +9,11 @@ function refreshBrowser() {
 function speak(text) {
     if (window.BottoNativeTTS) {
         window.BottoNativeTTS.speak(text);
-    } else {
-        alert("Native TTS not available");
+    }
+}
+
+function stopSpeak() {
+    if (window.BottoNativeTTS) {
+        window.BottoNativeTTS.stop();
     }
 }

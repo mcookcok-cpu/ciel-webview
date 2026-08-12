@@ -1,9 +1,9 @@
 package com.ciel.webview;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.webkit.JavascriptInterface;
-import android.webkit.WebView;
 import org.apache.cordova.*;
 import java.util.Locale;
 
@@ -42,6 +42,16 @@ public class MainActivity extends CordovaActivity implements TextToSpeech.OnInit
         @JavascriptInterface
         public void speak(String text) {
             tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
+        }
+
+        @JavascriptInterface
+        public void stop() {
+            if (tts != null) tts.stop();
+        }
+
+        @JavascriptInterface
+        public boolean isAvailable() {
+            return tts != null;
         }
     }
 }
