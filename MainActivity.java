@@ -17,6 +17,15 @@ public class MainActivity extends CordovaActivity implements TextToSpeech.OnInit
         tts = new TextToSpeech(this, this);
         appView.getSettings().setJavaScriptEnabled(true);
         appView.addJavascriptInterface(new BottoNativeTTS(this), "BottoNativeTTS");
+        
+        // Downloader Listener
+        appView.setDownloadListener((url, userAgent, contentDisposition, mimetype, contentLength) -> {
+            android.app.DownloadManager.Request request = new android.app.DownloadManager.Request(android.net.Uri.parse(url));
+            request.allowScanningByMediaScanner();
+            request.setNotificationVisibility(android.app.DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            android.app.DownloadManager dm = (android.app.DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+            dm.enqueue(request);
+        });
     }
 
     @Override
